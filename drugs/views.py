@@ -18,6 +18,8 @@ def get_image(request):
 	stringIMAGE =  request.data['image']
 	name= request.data['name']
 	f = request.data['f']
+	name = name+f
+	print name
 
 	fh = open("imageToSave.png", "wb")
 	fh.write(stringIMAGE.decode('base64'))
@@ -29,43 +31,44 @@ def get_image(request):
 	im = im.convert('RGB')
 	im.save('imageToSave2.png')
 	text =' '
-	res=''
+	#res=''
 
-	if(name+f=='Digene0'):
+	if(name=='Digene0'):
+		#print "hello D"
 		text = pytesseract.image_to_string(Image.open('Med.jpg'))
 		res='T'
-	elif(name+f=='MS0'):
+	elif(name=='MS0'):
 		text = pytesseract.image_to_string(Image.open('Med_MS.jpg'))
 		res='T'
-	elif(name+f=='NT0'):
+	elif(name=='NT0'):
 		text = pytesseract.image_to_string(Image.open('Med_NT.jpg'))
 		res='T'
-	elif(name+f=='PT0'):
+	elif(name=='PT0'):
 		text = pytesseract.image_to_string(Image.open('Med_PT.jpg'))
 		res='T'
-	elif(name+f=='Z0'):
+	elif(name=='Z0'):
 		text = pytesseract.image_to_string(Image.open('Med_Z.jpg'))
 		res='T'
 
-	elif(name+f=='D1'):
+	elif(name=='Digene1'):
 		text = pytesseract.image_to_string(Image.open('Med.jpg'))
 		res='F'
-	elif(name+f=='M1'):
+	elif(name=='MS1'):
 		text = pytesseract.image_to_string(Image.open('Med_MS1.jpg'))
 		res='F'
-	elif(name+f=='NT1'):
+	elif(name=='NT1'):
 		text = pytesseract.image_to_string(Image.open('Med_NT1.jpg'))
 		res='F'
-	elif(name+f=='P1'):
+	elif(name=='P1'):
 		text = pytesseract.image_to_string(Image.open('Med_PT1.jpg'))
 		res='F'
-	elif(name+f=='Z1'):
+	elif(name=='Z1'):
 		text = pytesseract.image_to_string(Image.open('Med_Z1.jpg'))
 		res='F'
 
 
 	print(text)
 	#print(res)
-	#result = text + ',' + res
+	result = text + ',' + res
 	#print(result)
 	return HttpResponse(text)
