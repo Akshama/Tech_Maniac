@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include,url
 from django.contrib import admin
+from drugs import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^image', views.get_image) 
+
 ]
 
